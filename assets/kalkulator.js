@@ -23,6 +23,13 @@ function inputDigit(digit) {
     calculator.displaynumber += digit;
   }
 }
+
+function inversenumber() {
+  if (calculator.displaynumber === '0') {
+    return;
+  }
+  calculator.displaynumber = calculator.displaynumber * -1;
+}
  
 const buttons = document.querySelectorAll('.button');
 for (const button of buttons) {
