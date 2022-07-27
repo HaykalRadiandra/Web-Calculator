@@ -6,7 +6,7 @@ const calculator = {
 };
  
 function updateDisplay() {
-  document.querySelector('#displaynumber').innerText = calculator.displayNumber;
+  document.querySelector('#displaynumber').innerText = calculator.displaynumber;
 }
  
 function clearCalculator() {
@@ -17,7 +17,11 @@ function clearCalculator() {
 }
  
 function inputDigit(digit) {
-  calculator.displaynumber += digit;
+  if (calculator.displaynumber === '0') {
+    calculator.displaynumber = digit;
+  } else {  
+    calculator.displaynumber += digit;
+  }
 }
  
 const buttons = document.querySelectorAll('.button');
