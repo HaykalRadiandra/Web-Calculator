@@ -36,6 +36,23 @@ for (const button of buttons) {
       return
     }
     
+    if (target.classList.contains('negative')) {
+      inversenumber();
+      updateDisplay();
+      return
+    }
+
+    if (target.classList.contains('equals')) {
+      performCalculation();
+      updateDisplay();
+      return
+    }
+
+    if (target.classList.contains('operator')) {
+      handleOperator(target,innerText);
+      return
+    }
+
     inputDigit(target.innerText);
     updateDisplay();
   });
