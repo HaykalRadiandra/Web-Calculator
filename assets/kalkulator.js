@@ -30,7 +30,36 @@ function inversenumber() {
   }
   calculator.displaynumber = calculator.displaynumber * -1;
 }
+
+function handleOperator (operator) {
+  if (!calculator.isWaitForSecondNumber) {
+    calculator.operator = operator;
+    calculator.isWaitForSecondNumber = true;
+    calculator.firstNumber = calculator.displaynumber;
+
+    //mengatur ulang nilai display number tombol selanjutnya dimulai dari angka pertama lagi
+    calculator.displaynumber = '0';
+  } else {
+    alert('Operator sudah ditetapkan');
+  }
+}
+
+function performCalculation() {
+  if (calculator.firstNumber == null || calculator.operator == null) {
+    alert('Anda belum menetapkan operator');
+    return;
+  }
  
+  let result = 0;
+  if (calculator.operator === '+') {
+    result = parseInt(calculator.firstNumber) + parseInt(calculator.displayNumber);
+  } else {
+    result = parseInt(calculator.firstNumber) - parseInt(calculator.displayNumber);
+  }
+ 
+  calculator.displayNumber = result;
+}
+
 const buttons = document.querySelectorAll('.button');
 for (const button of buttons) {
   button.addEventListener('click', function (event) {
@@ -56,7 +85,7 @@ for (const button of buttons) {
     }
 
     if (target.classList.contains('operator')) {
-      handleOperator(target,innerText);
+      handleOperator(target.innerText);
       return
     }
 
