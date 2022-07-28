@@ -44,6 +44,21 @@ function handleOperator (operator) {
   }
 }
 
+function performCalculation() {
+  if (calculator.firstNumber == null || calculator.operator == null) {
+    alert('Anda belum menetapkan operator');
+    return;
+  }
+  
+  let result = 0;
+  if (calculator.operator === '+') {
+    result = parseInt(calculator.firstNumber) + parseInt(calculator.displaynumber);
+  } else {
+    result = parseInt(calculator.firstNumber) - parseInt(calculator.displaynumber);
+  }
+  
+  calculator.displaynumber = result;
+}
 
 const buttons = document.querySelectorAll('.button');
 for (const button of buttons) {
