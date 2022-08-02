@@ -1,94 +1,101 @@
 const calculator = {
-  displaynumber: '0',
+  displayNumber: '0',
   operator: null,
   firstNumber: null,
   isWaitForSecondNumber: false,
 };
  
 function updateDisplay() {
-  document.querySelector('#displaynumber').innerText = calculator.displaynumber;
+  document.querySelector('#displayNumber').innerText = calculator.displayNumber;
 }
  
 function clearCalculator() {
-  calculator.displaynumber = '0';
+  calculator.displayNumber = '0';
   calculator.operator = null;
   calculator.firstNumber = null;
   calculator.isWaitForSecondNumber = false;
 }
  
 function inputDigit(digit) {
-  if (calculator.displaynumber === '0') {
-    calculator.displaynumber = digit;
-  } else {  
-    calculator.displaynumber += digit;
+  if (calculator.displayNumber === '0') {
+    calculator.displayNumber = digit;
+  } else {
+    calculator.displayNumber += digit;
   }
 }
-
-function inversenumber() {
-  if (calculator.displaynumber === '0') {
+ 
+function inverseNumber() {
+  if (calculator.displayNumber === '0') {
     return;
   }
-  calculator.displaynumber = calculator.displaynumber * -1;
+  calculator.displayNumber = calculator.displayNumber * -1;
 }
-
-function handleOperator (operator) {
+ 
+function handleOperator(operator) {
   if (!calculator.isWaitForSecondNumber) {
     calculator.operator = operator;
     calculator.isWaitForSecondNumber = true;
-    calculator.firstNumber = calculator.displaynumber;
-
-    //mengatur ulang nilai display number tombol selanjutnya dimulai dari angka pertama lagi
-    calculator.displaynumber = '0';
+    calculator.firstNumber = calculator.displayNumber;
+    calculator.displayNumber = '0';
   } else {
     alert('Operator sudah ditetapkan');
   }
 }
-
+ 
 function performCalculation() {
   if (calculator.firstNumber == null || calculator.operator == null) {
     alert('Anda belum menetapkan operator');
     return;
   }
-  
+ 
   let result = 0;
   if (calculator.operator === '+') {
-    result = parseInt(calculator.firstNumber) + parseInt(calculator.displaynumber);
+    result = parseInt(calculator.firstNumber) + parseInt(calculator.displayNumber);
   } else {
-    result = parseInt(calculator.firstNumber) - parseInt(calculator.displaynumber);
+    result = parseInt(calculator.firstNumber) - parseInt(calculator.displayNumber);
   }
-  
-  calculator.displaynumber = result;
+ 
+  // objek yang akan dikirimkan sebagai argumen fungsi putHistory()
+   const history = {
+       firstNumber: calculator.firstNumber,
+       secondNumber: calculator.displayNumber,
+       operator: calculator.operator,
+       result: result
+   }
+   putHistory(history);
+   calculator.displayNumber = result;
+   renderHistory();
 }
-
+ 
 const buttons = document.querySelectorAll('.button');
 for (const button of buttons) {
   button.addEventListener('click', function (event) {
     // mendapatkan objek elemen yang diklik
     const target = event.target;
-
+ 
     if (target.classList.contains('clear')) {
       clearCalculator();
       updateDisplay();
-      return
+      return;
     }
-    
+ 
     if (target.classList.contains('negative')) {
-      inversenumber();
+      inverseNumber();
       updateDisplay();
-      return
+      return;
     }
-
+ 
     if (target.classList.contains('equals')) {
       performCalculation();
       updateDisplay();
-      return
+      return;
     }
-
+ 
     if (target.classList.contains('operator')) {
-      handleOperator(target.innerText);
-      return
+      handleOperator(target.innerText)
+      return;
     }
-
+ 
     inputDigit(target.innerText);
     updateDisplay();
   });
