@@ -34,7 +34,7 @@ function showHistory() {
 function renderHistory() {
    const historyData = showHistory();
    let historyList = document.querySelector("#historyList");
-   historyList.innerHTML = "";
+   historyList.innerHTML="";
  
    for (let history of historyData) {
        let row = document.createElement('tr');
@@ -46,5 +46,5 @@ function renderHistory() {
        historyList.appendChild(row);
    }
 }
- 
+
 renderHistory();

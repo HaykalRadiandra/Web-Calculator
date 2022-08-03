@@ -65,8 +65,8 @@ function performCalculation() {
    putHistory(history);
    calculator.displayNumber = result;
    renderHistory();
-}
- 
+  }
+  
 const buttons = document.querySelectorAll('.button');
 for (const button of buttons) {
   button.addEventListener('click', function (event) {

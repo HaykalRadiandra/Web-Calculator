@@ -62,7 +62,15 @@
      text-shadow: 2px 2px 4px white;
    }
 
-  @media screen and (max-width: 992px) {
+  @media screen and (max-width: 513px) {
+
+    /* .button {
+      padding: 10px;
+    }
+
+    .history {
+      width: 100%;
+    } */
 
     .card {
       padding: 15px;
